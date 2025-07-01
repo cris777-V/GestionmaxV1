@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const Usuario = require('./models/Usuario');
+const Solicitud = require('./models/Solicitud');
+
 
 const app = express();
 
@@ -86,6 +88,33 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ mensaje: 'Contraseña incorrecta' });
     }
 
+app.post('/solicitud', async (req, res) => {
+  if (!req.session.usuario) {
+    return res.status(401).json({ mensaje: 'No autorizado' });
+  }
+
+  const { comentario } = req.body;
+
+  if (!comentario) {
+    return res.status(400).json({ mensaje: 'Comentario requerido' });
+  }
+
+  try {
+    const nuevaSolicitud = new Solicitud({
+      usuario: req.session.usuario.id,
+      comentario
+    });
+
+    await nuevaSolicitud.save();
+
+    res.status(201).json({ mensaje: 'Solicitud enviada con éxito' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error al guardar la solicitud' });
+  }
+});
+
+
     // Aquí puedes guardar en sesión si usas sesiones:
 
 req.session.usuario = {
@@ -122,6 +151,20 @@ app.post('/logout', (req, res) => {
     res.clearCookie('connect.sid');
     res.json({ mensaje: 'Sesión cerrada con éxito' });
   });
+});
+
+app.get('/mis-solicitudes', async (req, res) => {
+  if (!req.session.usuario) {
+    return res.status(401).json({ mensaje: 'No autorizado' });
+  }
+
+  try {
+    const solicitudes = await Solicitud.find({ usuario: req.session.usuario.id }).sort({ fecha: -1 });
+    res.json(solicitudes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error al obtener las solicitudes' });
+  }
 });
 
 

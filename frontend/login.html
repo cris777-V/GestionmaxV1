@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión - GestionMax</title>
+</head>
+<body>
+  <h1>Iniciar Sesión</h1>
+
+    <h2 id="mensaje-sesion"></h2>
+    <button id="boton-logout" style="display: none;">Cerrar sesión</button>
+
+  <form id="form-login">
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" required><br>
+
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" id="contraseña" required><br>
+
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <p id="mensaje"></p>
+
+  <script>
+    const form = document.getElementById('form-login');
+    const mensaje = document.getElementById('mensaje');
+
+// Verificar sesión activa al cargar la página
+async function verificarSesion() {
+  try {
+    const res = await fetch('http://localhost:3000/panel', {
+      credentials: 'include'
+    });
+    const data = await res.json();
+
+    if (res.status === 200) {
+      document.getElementById('mensaje-sesion').textContent =
+        `Ya has iniciado sesión como ${data.usuario.nombre}`;
+      document.getElementById('boton-logout').style.display = 'inline-block';
+    }
+  } catch (error) {
+    console.error('No se pudo verificar la sesión');
+  }
+}
+
+document.getElementById('boton-logout').addEventListener('click', async () => {
+  try {
+    const res = await fetch('http://localhost:3000/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    const data = await res.json();
+    alert(data.mensaje);
+    location.reload(); // Recargar la página sin sesión
+  } catch (error) {
+    console.error('Error al cerrar sesión');
+  }
+});
+
+
+verificarSesion(); // Ejecutar al cargar
+
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const correo = document.getElementById('correo').value;
+      const contraseña = document.getElementById('contraseña').value;
+
+      try {
+        const respuesta = await fetch('http://localhost:3000/login', {
+  method: 'POST',
+  credentials: 'include', // <--- ¡ESTO es lo más importante!
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ correo, contraseña })
+});
+
+
+        const data = await respuesta.json();
+        mensaje.textContent = data.mensaje;
+
+        if (respuesta.status === 200) {
+          mensaje.style.color = 'green';
+          // Puedes redirigir a otra página si quieres
+          // window.location.href = "dashboard.html";
+        } else {
+          mensaje.style.color = 'red';
+        }
+      } catch (error) {
+        mensaje.textContent = 'Error de conexión con el servidor';
+        mensaje.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>

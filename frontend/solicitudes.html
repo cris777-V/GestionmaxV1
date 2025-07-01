@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitudes - GestionMax</title>
+</head>
+<body>
+  <h1>Solicitudes</h1>
+
+  <h2 id="mensaje-sesion">Cargando sesión...</h2>
+
+  <div id="formulario-solicitud" style="display: none;">
+    <form id="form-solicitud">
+      <label for="comentario">Tu solicitud o comentario:</label><br>
+      <textarea id="comentario" rows="4" cols="50" required></textarea><br>
+      <button type="submit">Enviar solicitud</button>
+    </form>
+    <p id="estado-solicitud"></p>
+  </div>
+
+  <script>
+    const mensajeSesion = document.getElementById('mensaje-sesion');
+    const formulario = document.getElementById('formulario-solicitud');
+    const estado = document.getElementById('estado-solicitud');
+    const form = document.getElementById('form-solicitud');
+
+    async function verificarSesion() {
+      try {
+        const res = await fetch('http://localhost:3000/panel', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+
+        if (res.status === 200) {
+          mensajeSesion.textContent = `Sesión activa: ${data.usuario.nombre}`;
+          formulario.style.display = 'block';
+        } else {
+          mensajeSesion.textContent = 'Debes iniciar sesión para enviar una solicitud.';
+        }
+      } catch (error) {
+        mensajeSesion.textContent = 'Error al verificar la sesión.';
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const comentario = document.getElementById('comentario').value;
+
+      try {
+        const res = await fetch('http://localhost:3000/solicitud', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ comentario })
+        });
+
+        const data = await res.json();
+        estado.textContent = data.mensaje;
+        estado.style.color = res.status === 201 ? 'green' : 'red';
+
+        if (res.status === 201) {
+          form.reset();
+        }
+      } catch (error) {
+        estado.textContent = 'Error al enviar la solicitud.';
+        estado.style.color = 'red';
+      }
+    });
+
+    verificarSesion();
+  </script>
+</body>
+</html>

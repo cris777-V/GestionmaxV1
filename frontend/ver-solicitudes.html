@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Solicitudes - GestionMax</title>
+</head>
+<body>
+  <h1>Mis Solicitudes</h1>
+
+  <h2 id="mensaje-sesion">Cargando sesión...</h2>
+
+  <div id="contenedor-solicitudes" style="display: none;">
+    <ul id="lista-solicitudes"></ul>
+  </div>
+
+  <script>
+    async function verificarSesionYMostrar() {
+      try {
+        const sesion = await fetch('http://localhost:3000/panel', {
+          credentials: 'include'
+        });
+        const sesionData = await sesion.json();
+
+        if (sesion.status === 200) {
+          document.getElementById('mensaje-sesion').textContent =
+            `Solicitudes de ${sesionData.usuario.nombre}`;
+          document.getElementById('contenedor-solicitudes').style.display = 'block';
+          obtenerSolicitudes();
+        } else {
+          document.getElementById('mensaje-sesion').textContent =
+            'Debes iniciar sesión para ver tus solicitudes.';
+        }
+      } catch (error) {
+        document.getElementById('mensaje-sesion').textContent = 'Error al verificar sesión.';
+      }
+    }
+
+    async function obtenerSolicitudes() {
+      try {
+        const res = await fetch('http://localhost:3000/mis-solicitudes', {
+          credentials: 'include'
+        });
+        const solicitudes = await res.json();
+
+        const lista = document.getElementById('lista-solicitudes');
+        lista.innerHTML = '';
+
+        if (solicitudes.length === 0) {
+          lista.innerHTML = '<li>No has enviado ninguna solicitud.</li>';
+        } else {
+          solicitudes.forEach((s) => {
+            const item = document.createElement('li');
+            const fecha = new Date(s.fecha).toLocaleString();
+            item.textContent = `${fecha} - ${s.comentario}`;
+            lista.appendChild(item);
+          });
+        }
+      } catch (error) {
+        console.error('Error al obtener las solicitudes');
+      }
+    }
+
+    verificarSesionYMostrar();
+  </script>
+</body>
+</html>

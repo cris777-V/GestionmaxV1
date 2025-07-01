@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil de Usuario - GestionMax</title>
+</head>
+<body>
+  <h1>Tu Perfil</h1>
+
+  <div id="info-usuario">
+    <p id="nombre"></p>
+    <p id="correo"></p>
+  </div>
+
+  <script>
+    async function cargarPerfil() {
+      try {
+        const res = await fetch('http://localhost:3000/panel', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+
+        if (res.status === 200) {
+          document.getElementById('nombre').textContent = `Nombre: ${data.usuario.nombre}`;
+          document.getElementById('correo').textContent = `Correo: ${data.usuario.correo}`;
+        } else {
+          document.getElementById('info-usuario').textContent =
+            'Debes iniciar sesión para ver esta información.';
+        }
+      } catch (error) {
+        document.getElementById('info-usuario').textContent =
+          'Error al cargar el perfil.';
+      }
+    }
+
+    cargarPerfil();
+  </script>
+</body>
+</html>
