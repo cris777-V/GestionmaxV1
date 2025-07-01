@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio - GestionMax</title>
+</head>
+<body>
+  <h1>Bienvenido a GestionMax</h1>
+
+  <h2 id="saludo"></h2>
+
+  <div id="botones">
+    <button onclick="location.href='login.html'">Iniciar sesión</button>
+    <button onclick="location.href='register.html'">Registrarse</button>
+    <button id="crear-solicitud">Crear solicitud</button>
+    <button id="ver-solicitudes" style="display: none;">Ver mis solicitudes</button>
+    <button id="ir-perfil" style="display: none;">Mi perfil</button>
+  </div>
+
+  <p id="mensaje-alerta" style="color: red;"></p>
+
+  <script>
+  let sesionActiva = false;
+
+  async function verificarSesion() {
+    try {
+      const res = await fetch('http://localhost:3000/panel', {
+        credentials: 'include'
+      });
+      const data = await res.json();
+
+      if (res.status === 200) {
+        sesionActiva = true;
+        document.getElementById('saludo').textContent = `Hola, ${data.usuario.nombre}`;
+        document.getElementById('ver-solicitudes').style.display = 'inline-block';
+        document.getElementById('ir-perfil').style.display = 'inline-block';
+      } else {
+        document.getElementById('saludo').textContent = 'Inicia sesión o regístrate para continuar.';
+      }
+    } catch (error) {
+      document.getElementById('saludo').textContent = 'Error al verificar la sesión.';
+    }
+  }
+
+  // Acción del botón Crear Solicitud
+  document.getElementById('crear-solicitud').addEventListener('click', () => {
+    if (sesionActiva) {
+      location.href = 'solicitudes.html';
+    } else {
+      document.getElementById('mensaje-alerta').textContent = 'Por favor, inicia sesión para crear una solicitud.';
+    }
+  });
+
+  // Acción del botón Mi perfil
+  document.getElementById('ir-perfil').addEventListener('click', () => {
+    location.href = 'perfil.html';
+  });
+  
+// Acción del botón Ver mis solicitudes
+document.getElementById('ver-solicitudes').addEventListener('click', () => {
+  location.href = 'ver-solicitudes.html'; // O el nombre que vayas a usar
+});
+
+  verificarSesion();
+</script>
+
+</body>
+</html>
