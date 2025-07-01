@@ -11,10 +11,10 @@ mongoose
   .catch((err) => console.error('🔴 Error en MongoDB:', err));
 
 app.get('/', (req, res) => {
-  res.send('Servidor GestionMax funcionando');
+    res.send('Servidor GestionMax funcionando');
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
