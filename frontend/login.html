@@ -29,7 +29,7 @@
 
     async function verificarSesion() {
       try {
-        const res = await fetch('http://gestionmaxv1.onrender.com/panel', {
+        const res = await fetch('https://gestionmaxv1.onrender.com/panel', {
           credentials: 'include'
         });
         const data = await res.json();
@@ -46,7 +46,7 @@
 
     document.getElementById('boton-logout').addEventListener('click', async () => {
       try {
-        const res = await fetch('http://gestionmaxv1.onrender.com/logout', {
+        const res = await fetch('https://gestionmaxv1.onrender.com/logout', {
           method: 'POST',
           credentials: 'include'
         });
@@ -67,7 +67,7 @@
       const contraseña = document.getElementById('contraseña').value;
 
       try {
-        const respuesta = await fetch('http://gestionmaxv1.onrender.com/login', {
+        const respuesta = await fetch('https://gestionmaxv1.onrender.com/login', {
           method: 'POST',
           credentials: 'include',
           headers: {

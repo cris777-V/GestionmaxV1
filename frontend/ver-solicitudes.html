@@ -17,7 +17,7 @@
   <script>
     async function verificarSesionYMostrar() {
       try {
-        const sesion = await fetch('http://gestionmaxv1.onrender.com/panel', {
+        const sesion = await fetch('https://gestionmaxv1.onrender.com/panel', {
           credentials: 'include'
         });
         const sesionData = await sesion.json();
@@ -38,7 +38,7 @@
 
     async function obtenerSolicitudes() {
       try {
-        const res = await fetch('http://gestionmaxv1.onrender.com/mis-solicitudes', {
+        const res = await fetch('https://gestionmaxv1.onrender.com/mis-solicitudes', {
           credentials: 'include'
         });
         const solicitudes = await res.json();

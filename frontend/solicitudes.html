@@ -26,7 +26,7 @@
 
     async function verificarSesion() {
       try {
-        const res = await fetch('http://gestionmaxv1.onrender.com/panel', {
+        const res = await fetch('https://gestionmaxv1.onrender.com/panel', {
           credentials: 'include'
         });
         const data = await res.json();
@@ -47,7 +47,7 @@
       const comentario = document.getElementById('comentario').value;
 
       try {
-        const res = await fetch('http://gestionmaxv1.onrender.com/solicitud', {
+        const res = await fetch('https://gestionmaxv1.onrender.com/solicitud', {
           method: 'POST',
           credentials: 'include',
           headers: {
