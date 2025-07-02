@@ -42,3 +42,19 @@ button {
 button:hover {
   background-color: #005fa3;
 }
+#btn-volver {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
+  color: #0077cc;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+#btn-volver:hover {
+  color: #005fa3;
+}
