@@ -1,0 +1,90 @@
+/* Estilo general */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #ffffff, #e6f0ff);
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: #003366;
+}
+
+/* Títulos */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #004b99;
+}
+
+/* Formularios */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f0f8ff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Etiquetas y campos */
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #aaccee;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Botón general */
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Contenedor de mensajes */
+#mensaje-alerta, .mensaje-error {
+  margin-top: 1rem;
+  color: #cc0000;
+  font-weight: bold;
+}
+
+/* Para datos como nombre/correo en perfil */
+#info-usuario p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+/* Botón de regresar */
+.volver {
+  margin-top: 2rem;
+  background-color: #cccccc;
+  color: #003366;
+}
+
+.volver:hover {
+  background-color: #aaaaaa;
+}
