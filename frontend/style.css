@@ -69,3 +69,66 @@ h1 {
     padding: 0.7rem;
   }
 }
+
+#descripcion {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #f5faff;
+  border-left: 6px solid #0077cc;
+  border-radius: 8px;
+  text-align: left;
+}
+
+#descripcion h2, #descripcion h3 {
+  color: #004b99;
+}
+
+#descripcion p {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+footer {
+  background-color: #cce6ff; /* Azul claro */
+  color: #003366;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: 3rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.marca {
+  font-size: 0.8rem;
+  vertical-align: super;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact-block a {
+  display: inline-block;
+  color: #004b99;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.contact-block a:hover {
+  text-decoration: underline;
+  color: #002244;
+}
+
+.contact-block i {
+  margin-right: 0.5rem;
+}
