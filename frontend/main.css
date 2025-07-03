@@ -1,13 +1,15 @@
-/* Estilo general con animación de fondo más notoria */
+/* Estilo general con animación de fondo suave y notoria */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 2rem;
   text-align: center;
   color: #003366;
-  background: linear-gradient(-45deg, #cce6ff, #ffffff, #cce6ff);
-  background-size: 400% 400%;
-  animation: fondoOscilante 20s ease infinite;
+  background: linear-gradient(-45deg, #d0e7ff, #ffffff, #cce0ff, #ffffff);
+  background-size: 300% 300%;
+  animation: fondoOscilante 25s ease infinite;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards, fondoOscilante 25s ease infinite;
 }
 
 @keyframes fondoOscilante {
@@ -16,14 +18,20 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 /* Títulos */
 h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 1.5rem;
   color: #004b99;
 }
 
-/* Botones y enlaces con animación */
+/* Botones con animación */
 button, .contact-block a, a {
   background-color: #0077cc;
   color: white;
@@ -32,7 +40,7 @@ button, .contact-block a, a {
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.4s ease, background-color 0.4s ease;
   text-decoration: none;
   display: inline-block;
   margin: 0.5rem;
@@ -50,22 +58,22 @@ button:hover, .contact-block a:hover, a:hover {
   font-weight: bold;
 }
 
-/* Descripción animada */
+/* Cajita animada para la descripción */
 #descripcion {
   max-width: 900px;
-  margin: 2rem auto;
-  text-align: left;
-  animation: slideIn 1.5s ease-out;
-  background-color: rgba(255, 255, 255, 0.8);
+  margin: 3rem auto;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  animation: slideInUp 1.2s ease-out;
 }
 
-@keyframes slideIn {
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(50px);
   }
   to {
     opacity: 1;
@@ -98,12 +106,12 @@ button:hover, .contact-block a:hover, a:hover {
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   button {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
   }
 
   #descripcion {
@@ -113,11 +121,11 @@ button:hover, .contact-block a:hover, a:hover {
 
 @media (min-width: 1200px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   button {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     padding: 1rem 2rem;
   }
 
