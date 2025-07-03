@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acceso Caja - POS Web</title>
+  <link rel="stylesheet" href="posweb.css" />
+</head>
+<body>
+  <main style="max-width: 400px; margin: 100px auto; text-align: center;">
+    <h1>Acceso para Caja</h1>
+    <form id="form-caja">
+      <label for="clave">Contraseña:</label><br>
+      <input type="password" id="clave" placeholder="Ingrese la clave" required /><br><br>
+      <button type="submit">Ingresar</button>
+    </form>
+    <p id="mensaje" style="color: red; margin-top: 10px;"></p>
+  </main>
+
+  <script>
+    document.getElementById('form-caja').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const clave = document.getElementById('clave').value;
+
+      // Contraseña fija (puedes cambiarla)
+      const claveCorrecta = '123caja';
+
+      if (clave === claveCorrecta) {
+        location.href = 'caja-panel.html';
+      } else {
+        document.getElementById('mensaje').textContent = 'Contraseña incorrecta.';
+      }
+    });
+  </script>
+</body>
+</html>
