@@ -13,30 +13,21 @@
 
   <div id="formulario-solicitud" style="display: none;">
     <form id="form-solicitud">
-      <div class="form-group">
-        <label for="nombreContacto">Nombre de contacto:</label><br>
-        <input type="text" id="nombreContacto" placeholder="Ej: Juan Pérez" required><br>
-      </div>
+  <label for="nombre">Nombre de contacto:</label><br>
+  <input type="text" id="nombre" placeholder="Ej: Ana Pérez"><br><br>
 
-      <div class="form-group">
-        <label for="telefonoContacto">Número de contacto:</label><br>
-        <input type="tel" id="telefonoContacto" placeholder="Ej: 3101234567" required><br>
-      </div>
+  <label for="telefono">Teléfono:</label><br>
+  <input type="tel" id="telefono" placeholder="Ej: 3101234567"><br><br>
 
-      <div class="form-group">
-        <label for="emailContacto">Correo electrónico:</label><br>
-        <input type="email" id="emailContacto" placeholder="Ej: juan@email.com" required><br>
-      </div>
+  <label for="email">Correo de contacto:</label><br>
+  <input type="email" id="email" placeholder="Ej: ejemplo@email.com"><br><br>
 
-      <div class="form-group">
-        <label for="comentario">
-          ¿Qué tipo de página web te gustaría y en qué horarios podemos contactarte?
-        </label><br>
-        <textarea id="comentario" rows="5" placeholder="Ej: Una página para mi restaurante. Prefiero contacto de 2 a 6 PM."></textarea><br>
-      </div>
+  <label for="comentario">¿Qué tipo de página web deseas? ¿En qué horarios prefieres ser contactado?</label><br>
+  <textarea id="comentario" rows="5" cols="50" placeholder="Escribe aquí tu solicitud detalladamente..." required></textarea><br><br>
 
-      <button type="submit">Enviar solicitud</button>
-    </form>
+  <button type="submit">Enviar solicitud</button>
+</form>
+
     <p id="estado-solicitud"></p>
   </div>
 
@@ -67,7 +58,12 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const comentario = document.getElementById('comentario').value.trim();
+      const nombre = document.getElementById('nombre').value;
+      const telefono = document.getElementById('telefono').value;
+      const email = document.getElementById('email').value;
+      const comentario = document.getElementById('comentario').value;
+
+body: JSON.stringify({ nombre, telefono, email, comentario })
 
       if (!comentario) {
         estado.textContent = 'Por favor completa el campo de comentario.';
