@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>POS Web Service - Restaurante</title>
+  <link rel="stylesheet" href="posweb.css">
+</head>
+<body>
+  <header>
+    <h1>Restaurante El Saborcito</h1>
+    <nav>
+      <ul>
+        <li><a href="#entradas">Entradas</a></li>
+        <li><a href="#platos">Platos Fuertes</a></li>
+        <li><a href="#postres">Postres</a></li>
+        <li><a href="#bebidas">Bebidas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="entradas">
+      <h2>Entradas</h2>
+      <div class="producto" data-nombre="Arepitas con Hogao" data-precio="5000">
+        <p>Arepitas con Hogao - $5000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+      <div class="producto" data-nombre="Empanadas" data-precio="4000">
+        <p>Empanadas (3 unidades) - $4000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+    </section>
+
+    <section id="platos">
+      <h2>Platos Fuertes</h2>
+      <div class="producto" data-nombre="Bandeja Paisa" data-precio="18000">
+        <p>Bandeja Paisa - $18000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+      <div class="producto" data-nombre="Pechuga Gratinada" data-precio="16000">
+        <p>Pechuga Gratinada - $16000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+    </section>
+
+    <section id="postres">
+      <h2>Postres</h2>
+      <div class="producto" data-nombre="Flan de Caramelo" data-precio="6000">
+        <p>Flan de Caramelo - $6000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+      <div class="producto" data-nombre="Tres Leches" data-precio="7000">
+        <p>Torta Tres Leches - $7000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+    </section>
+
+    <section id="bebidas">
+      <h2>Bebidas</h2>
+      <div class="producto" data-nombre="Limonada Natural" data-precio="4000">
+        <p>Limonada Natural - $4000</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+      <div class="producto" data-nombre="Gaseosa" data-precio="3500">
+        <p>Gaseosa - $3500</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      </div>
+    </section>
+
+    <section id="carrito">
+      <h2>🛒 Carrito de Compras</h2>
+      <ul id="lista-carrito"></ul>
+      <p>Total: $<span id="total">0</span></p>
+      <div>
+        <label for="tipo-pedido">Tipo de pedido:</label>
+        <select id="tipo-pedido">
+          <option value="domicilio">Domicilio</option>
+          <option value="mesa">Para mesa</option>
+        </select>
+      </div>
+      <button onclick="enviarPedido()">Hacer pedido</button>
+    </section>
+  </main>
+
+  <script src="posweb.js"></script>
+</body>
+</html>
