@@ -6,6 +6,18 @@ const SolicitudSchema = new mongoose.Schema({
     ref: 'Usuario',
     required: true
   },
+  nombre: {
+    type: String,
+    required: false
+  },
+  telefono: {
+    type: String,
+    required: false
+  },
+  email: {
+    type: String,
+    required: false
+  },
   comentario: {
     type: String,
     required: true

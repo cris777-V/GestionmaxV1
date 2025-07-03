@@ -102,15 +102,18 @@ app.post('/solicitud', async (req, res) => {
     return res.status(401).json({ mensaje: 'No autorizado' });
   }
 
-  const { comentario } = req.body;
+  const { nombre, telefono, email, comentario } = req.body;
 
   if (!comentario) {
-    return res.status(400).json({ mensaje: 'Comentario requerido' });
+    return res.status(400).json({ mensaje: 'El comentario es obligatorio' });
   }
 
   try {
     const nuevaSolicitud = new Solicitud({
       usuario: req.session.usuario.id,
+      nombre: nombre || '',
+      telefono: telefono || '',
+      email: email || '',
       comentario
     });
 
@@ -122,6 +125,8 @@ app.post('/solicitud', async (req, res) => {
     res.status(500).json({ mensaje: 'Error al guardar la solicitud' });
   }
 });
+
+
 
 // Panel (ver sesión)
 app.get('/panel', (req, res) => {

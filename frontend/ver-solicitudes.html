@@ -12,7 +12,7 @@
   <h2 id="mensaje-sesion">Cargando sesión...</h2>
 
   <div id="contenedor-solicitudes" style="display: none;">
-    <ul id="lista-solicitudes"></ul>
+    <div id="lista-solicitudes"></div>
   </div>
 
   <script>
@@ -48,13 +48,23 @@
         lista.innerHTML = '';
 
         if (solicitudes.length === 0) {
-          lista.innerHTML = '<li>No has enviado ninguna solicitud.</li>';
+          lista.innerHTML = '<p>No has enviado ninguna solicitud.</p>';
         } else {
           solicitudes.forEach((s) => {
-            const item = document.createElement('li');
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'tarjeta-solicitud';
+
             const fecha = new Date(s.fecha).toLocaleString();
-            item.textContent = `${fecha} - ${s.comentario}`;
-            lista.appendChild(item);
+
+            tarjeta.innerHTML = `
+              <p><strong>📅 Fecha:</strong> ${fecha}</p>
+              <p><strong>💬 Comentario:</strong> ${s.comentario}</p>
+              <p><strong>📞 Teléfono:</strong> ${s.telefono || 'No registrado'}</p>
+              <p><strong>📧 Email:</strong> ${s.email || 'No registrado'}</p>
+              <p><strong>👤 Nombre:</strong> ${s.nombre || 'No registrado'}</p>
+            `;
+
+            lista.appendChild(tarjeta);
           });
         }
       } catch (error) {
