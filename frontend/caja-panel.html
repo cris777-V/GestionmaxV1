@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Caja - POS Web</title>
+  <link rel="stylesheet" href="posweb.css" />
+</head>
+<body>
+  <header>
+    <h1>Panel de Caja - Restaurante</h1>
+    <button onclick="location.href='posweb.html'">← Volver al menú</button>
+  </header>
+
+  <main style="max-width: 800px; margin: auto;">
+    <section>
+      <h2>Órdenes Pendientes</h2>
+      <ul id="lista-ordenes"></ul>
+    </section>
+
+    <section style="margin-top: 30px;">
+      <h2>📊 Estadísticas</h2>
+      <p>Total de órdenes: <span id="total-ordenes">0</span></p>
+      <p>Total vendido: $<span id="total-ventas">0</span></p>
+    </section>
+  </main>
+
+  <script>
+    async function cargarOrdenes() {
+      try {
+        const res = await fetch('/orden-posweb');
+        const data = await res.json();
+
+        const lista = document.getElementById('lista-ordenes');
+        const totalOrdenes = document.getElementById('total-ordenes');
+        const totalVentas = document.getElementById('total-ventas');
+
+        lista.innerHTML = '';
+        let sumaTotal = 0;
+
+        data.forEach((orden) => {
+          let subtotal = 0;
+          const li = document.createElement('li');
+          li.style.border = "1px solid #ccc";
+          li.style.padding = "10px";
+          li.style.marginBottom = "10px";
+          li.style.borderRadius = "8px";
+          li.style.background = "#fefefe";
+
+          const fecha = new Date(orden.fecha).toLocaleString();
+          let contenido = `<p><strong>Fecha:</strong> ${fecha}</p>`;
+          contenido += `<p><strong>Tipo:</strong> ${orden.tipo}</p><ul>`;
+
+          orden.pedido.forEach(item => {
+            const linea = `<li>${item.nombre} - $${item.precio} x ${item.cantidad}</li>`;
+            contenido += linea;
+            subtotal += item.precio * item.cantidad;
+          });
+
+          contenido += `</ul><p><strong>Total Orden:</strong> $${subtotal}</p>`;
+          contenido += `<button onclick="eliminarOrden('${orden._id}')">🗑️ Marcar como completada</button>`;
+
+          li.innerHTML = contenido;
+          lista.appendChild(li);
+
+          sumaTotal += subtotal;
+        });
+
+        totalOrdenes.textContent = data.length;
+        totalVentas.textContent = sumaTotal;
+
+      } catch (err) {
+        console.error('Error al cargar órdenes:', err);
+      }
+    }
+
+    async function eliminarOrden(id) {
+      try {
+        const res = await fetch(`/orden-posweb/${id}`, {
+          method: 'DELETE'
+        });
+
+        const data = await res.json();
+        alert(data.mensaje);
+        cargarOrdenes();
+      } catch (err) {
+        console.error('Error al eliminar orden:', err);
+      }
+    }
+
+    cargarOrdenes();
+  </script>
+</body>
+</html>
