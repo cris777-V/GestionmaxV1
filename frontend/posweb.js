@@ -71,3 +71,42 @@ async function enviarPedido() {
     alert('Error al enviar el pedido');
   }
 }
+const menu = {
+  entradas: [
+    { nombre: "Arepitas con Hogao", precio: 5000 },
+    { nombre: "Empanadas (3 unidades)", precio: 4000 },
+  ],
+  platos: [
+    { nombre: "Bandeja Paisa", precio: 18000 },
+    { nombre: "Pechuga Gratinada", precio: 16000 },
+  ],
+  postres: [
+    { nombre: "Flan de Caramelo", precio: 6000 },
+    { nombre: "Torta Tres Leches", precio: 7000 },
+  ],
+  bebidas: [
+    { nombre: "Limonada Natural", precio: 4000 },
+    { nombre: "Gaseosa", precio: 3500 },
+  ]
+};
+
+function renderizarMenu() {
+  for (let categoria in menu) {
+    const contenedor = document.getElementById(`menu-${categoria}`);
+    menu[categoria].forEach((producto) => {
+      const div = document.createElement('div');
+      div.classList.add('producto');
+      div.dataset.nombre = producto.nombre;
+      div.dataset.precio = producto.precio;
+
+      div.innerHTML = `
+        <p>${producto.nombre} - $${producto.precio}</p>
+        <button onclick="agregarAlCarrito(this)">Agregar</button>
+      `;
+      contenedor.appendChild(div);
+    });
+  }
+}
+
+renderizarMenu();
+
