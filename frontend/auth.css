@@ -1,0 +1,134 @@
+/* Fondo animado y base */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(-45deg, #d0e7ff, #ffffff, #cce0ff, #ffffff);
+  background-size: 300% 300%;
+  animation: fondoOscilante 25s ease infinite, fadeIn 1s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+}
+
+@keyframes fondoOscilante {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Título animado */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #004b99;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: slideDown 1s ease-out forwards;
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botones superiores (Volver y Cerrar sesión) */
+button, #boton-logout {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 0.5rem;
+}
+
+button:hover, #boton-logout:hover {
+  background-color: #005fa3;
+  transform: scale(1.05);
+}
+
+/* Formulario animado y centrado */
+form#form-login {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+  animation: fadeSlideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Campos del formulario */
+form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: #003366;
+}
+
+form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #aaccee;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Botón de enviar dentro del form */
+form button[type="submit"] {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Mensaje debajo del formulario */
+#mensaje, #mensaje-sesion {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  form#form-login {
+    padding: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}

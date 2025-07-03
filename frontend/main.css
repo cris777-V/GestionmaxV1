@@ -1,4 +1,4 @@
-/* Estilo general con animación de fondo suave y notoria */
+/* Estilo general con animación de fondo suave */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -7,9 +7,8 @@ body {
   color: #003366;
   background: linear-gradient(-45deg, #d0e7ff, #ffffff, #cce0ff, #ffffff);
   background-size: 300% 300%;
-  animation: fondoOscilante 25s ease infinite;
+  animation: fondoOscilante 25s ease infinite, fadeIn 1s ease forwards;
   opacity: 0;
-  animation: fadeIn 1s ease forwards, fondoOscilante 25s ease infinite;
 }
 
 @keyframes fondoOscilante {
@@ -19,20 +18,29 @@ body {
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
-/* Títulos */
+/* Título con animación */
 h1 {
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
   color: #004b99;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: slideDown 1s ease-out forwards;
+  animation-delay: 0.3s;
 }
 
-/* Botones con animación */
-button, .contact-block a, a {
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botones con animación y estilo */
+#botones button {
   background-color: #0077cc;
   color: white;
   border: none;
@@ -44,15 +52,32 @@ button, .contact-block a, a {
   text-decoration: none;
   display: inline-block;
   margin: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideUp 0.6s ease forwards;
 }
 
-button:hover, .contact-block a:hover, a:hover {
+#botones button:nth-child(1) { animation-delay: 1s; }
+#botones button:nth-child(2) { animation-delay: 1.2s; }
+#botones button:nth-child(3) { animation-delay: 1.4s; }
+#botones button:nth-child(4) { animation-delay: 1.6s; }
+#botones button:nth-child(5) { animation-delay: 1.8s; }
+#botones button:nth-child(6) { animation-delay: 2s; }
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+button:hover {
   background-color: #005fa3;
   transform: scale(1.08);
 }
 
 /* Contenedor de mensajes */
-#mensaje-alerta, .mensaje-error {
+#mensaje-alerta {
   margin-top: 1rem;
   color: #cc0000;
   font-weight: bold;
@@ -67,7 +92,10 @@ button:hover, .contact-block a:hover, a:hover {
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: left;
-  animation: slideInUp 1.2s ease-out;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideInUp 1.2s ease-out forwards;
+  animation-delay: 2.5s; /* Empieza después de los botones */
 }
 
 @keyframes slideInUp {
@@ -109,7 +137,7 @@ button:hover, .contact-block a:hover, a:hover {
     font-size: 1.6rem;
   }
 
-  button {
+  #botones button {
     font-size: 0.9rem;
     padding: 0.6rem 1rem;
   }
@@ -124,7 +152,7 @@ button:hover, .contact-block a:hover, a:hover {
     font-size: 2.8rem;
   }
 
-  button {
+  #botones button {
     font-size: 1.2rem;
     padding: 1rem 2rem;
   }
