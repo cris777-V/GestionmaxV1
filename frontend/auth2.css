@@ -1,0 +1,145 @@
+/* Fondo animado y base */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(-45deg, #d0e7ff, #ffffff, #cce0ff, #ffffff);
+  background-size: 300% 300%;
+  animation: fondoOscilante 25s ease infinite, fadeIn 1s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+}
+
+@keyframes fondoOscilante {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Título */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #004b99;
+  animation: slideDown 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botones */
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: #005fa3;
+  transform: scale(1.05);
+}
+
+/* Mensajes */
+#mensaje-sesion, #mensaje {
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+/* Tarjetas para solicitudes */
+#lista-solicitudes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 700px;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.tarjeta-solicitud {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  animation: fadeSlideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.tarjeta-solicitud p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #003366;
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tarjeta perfil */
+#info-usuario {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeSlideUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+#info-usuario p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #003366;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .tarjeta-solicitud {
+    padding: 1.2rem;
+  }
+
+  #info-usuario {
+    padding: 1.2rem;
+  }
+}
