@@ -141,27 +141,25 @@ app.get('/panel', (req, res) => {
 });
 
 // Ruta para guardar pedidos de POS Web Service
-app.post('/orden-posweb', async (req, res) => {
-  const { pedido, tipo } = req.body;
-
-  if (!Array.isArray(pedido) || pedido.length === 0) {
-    return res.status(400).json({ mensaje: 'El pedido está vacío.' });
-  }
-
+app.get('/orden-posweb', async (req, res) => {
   try {
-    const OrdenPos = mongoose.model('OrdenPos', new mongoose.Schema({
-      pedido: Array,
-      tipo: String,
-      fecha: { type: Date, default: Date.now }
-    }));
+    const OrdenPos = mongoose.model('OrdenPos');
+    const ordenes = await OrdenPos.find().sort({ fecha: -1 });
+    res.json(ordenes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error al obtener las órdenes' });
+  }
+});
 
-    const nuevaOrden = new OrdenPos({ pedido, tipo });
-    await nuevaOrden.save();
-
-    res.status(201).json({ mensaje: 'Pedido recibido correctamente' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: 'Error al guardar el pedido' });
+app.delete('/orden-posweb/:id', async (req, res) => {
+  try {
+    const OrdenPos = mongoose.model('OrdenPos');
+    await OrdenPos.findByIdAndDelete(req.params.id);
+    res.json({ mensaje: 'Orden eliminada correctamente' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensaje: 'Error al eliminar la orden' });
   }
 });
 
