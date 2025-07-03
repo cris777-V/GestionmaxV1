@@ -7,13 +7,34 @@
 </head>
 <body>
   <h1>Solicitudes</h1>
-    <button onclick="location.href='index.html'">Ir al menú principal</button>
+  <button onclick="location.href='index.html'">Ir al menú principal</button>
+
   <h2 id="mensaje-sesion">Cargando sesión...</h2>
 
   <div id="formulario-solicitud" style="display: none;">
     <form id="form-solicitud">
-      <label for="comentario">Tu solicitud o comentario:</label><br>
-      <textarea id="comentario" rows="4" cols="50" required></textarea><br>
+      <div class="form-group">
+        <label for="nombreContacto">Nombre de contacto:</label><br>
+        <input type="text" id="nombreContacto" placeholder="Ej: Juan Pérez" required><br>
+      </div>
+
+      <div class="form-group">
+        <label for="telefonoContacto">Número de contacto:</label><br>
+        <input type="tel" id="telefonoContacto" placeholder="Ej: 3101234567" required><br>
+      </div>
+
+      <div class="form-group">
+        <label for="emailContacto">Correo electrónico:</label><br>
+        <input type="email" id="emailContacto" placeholder="Ej: juan@email.com" required><br>
+      </div>
+
+      <div class="form-group">
+        <label for="comentario">
+          ¿Qué tipo de página web te gustaría y en qué horarios podemos contactarte?
+        </label><br>
+        <textarea id="comentario" rows="5" placeholder="Ej: Una página para mi restaurante. Prefiero contacto de 2 a 6 PM."></textarea><br>
+      </div>
+
       <button type="submit">Enviar solicitud</button>
     </form>
     <p id="estado-solicitud"></p>
@@ -45,15 +66,20 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const comentario = document.getElementById('comentario').value;
+
+      const comentario = document.getElementById('comentario').value.trim();
+
+      if (!comentario) {
+        estado.textContent = 'Por favor completa el campo de comentario.';
+        estado.style.color = 'red';
+        return;
+      }
 
       try {
         const res = await fetch('https://gestionmaxv1.onrender.com/solicitud', {
           method: 'POST',
           credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comentario })
         });
 
