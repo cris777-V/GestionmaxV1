@@ -56,41 +56,40 @@
     }
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  e.preventDefault();
 
-      const nombre = document.getElementById('nombre').value;
-      const telefono = document.getElementById('telefono').value;
-      const email = document.getElementById('email').value;
-      const comentario = document.getElementById('comentario').value;
+  const nombre = document.getElementById('nombre').value;
+  const telefono = document.getElementById('telefono').value;
+  const email = document.getElementById('email').value;
+  const comentario = document.getElementById('comentario').value;
 
-body: JSON.stringify({ nombre, telefono, email, comentario })
+  if (!comentario) {
+    estado.textContent = 'Por favor completa el campo de comentario.';
+    estado.style.color = 'red';
+    return;
+  }
 
-      if (!comentario) {
-        estado.textContent = 'Por favor completa el campo de comentario.';
-        estado.style.color = 'red';
-        return;
-      }
-
-      try {
-        const res = await fetch('https://gestionmaxv1.onrender.com/solicitud', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ comentario })
-        });
-
-        const data = await res.json();
-        estado.textContent = data.mensaje;
-        estado.style.color = res.status === 201 ? 'green' : 'red';
-
-        if (res.status === 201) {
-          form.reset();
-        }
-      } catch (error) {
-        estado.textContent = 'Error al enviar la solicitud.';
-        estado.style.color = 'red';
-      }
+  try {
+    const res = await fetch('https://gestionmaxv1.onrender.com/solicitud', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, telefono, email, comentario })
     });
+
+    const data = await res.json();
+    estado.textContent = data.mensaje;
+    estado.style.color = res.status === 201 ? 'green' : 'red';
+
+    if (res.status === 201) {
+      form.reset();
+    }
+  } catch (error) {
+    estado.textContent = 'Error al enviar la solicitud.';
+    estado.style.color = 'red';
+  }
+});
+
 
     verificarSesion();
   </script>
