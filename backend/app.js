@@ -143,6 +143,9 @@ app.get('/panel', (req, res) => {
 });
 
 // Ruta para guardar pedidos de POS Web Service
+
+
+
 app.post('/orden-posweb', async (req, res) => {
   const { pedido, tipo } = req.body;
 
@@ -159,6 +162,17 @@ app.post('/orden-posweb', async (req, res) => {
     res.status(500).json({ mensaje: 'Error al guardar el pedido' });
   }
 });
+
+app.get('/orden-posweb', async (req, res) => {
+  try {
+    const ordenes = await OrdenPos.find().sort({ fecha: -1 });
+    res.json(ordenes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al obtener las órdenes' });
+  }
+});
+
 
 
 app.delete('/orden-posweb/:id', async (req, res) => {

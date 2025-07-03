@@ -1,4 +1,3 @@
-// models/OrdenPos.js
 const mongoose = require('mongoose');
 
 const OrdenPosSchema = new mongoose.Schema({
@@ -9,11 +8,7 @@ const OrdenPosSchema = new mongoose.Schema({
       cantidad: Number
     }
   ],
-  tipo: {
-    type: String,
-    enum: ['domicilio', 'mesa'],
-    required: true
-  },
+  tipo: String,
   fecha: {
     type: Date,
     default: Date.now
