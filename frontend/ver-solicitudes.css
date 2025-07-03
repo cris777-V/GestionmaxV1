@@ -1,0 +1,63 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f6ff;
+  color: #333;
+  padding: 20px;
+  margin: 0;
+}
+
+h1 {
+  color: #0a3871;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 10px auto 30px;
+  padding: 10px 20px;
+  background-color: #0a3871;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #082c5a;
+}
+
+#mensaje-sesion {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#lista-solicitudes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.tarjeta-solicitud {
+  background-color: white;
+  border: 1px solid #cce0f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta-solicitud:hover {
+  transform: scale(1.02);
+}
+
+.tarjeta-solicitud p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
