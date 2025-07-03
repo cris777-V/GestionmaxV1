@@ -140,6 +140,32 @@ app.get('/panel', (req, res) => {
   }
 });
 
+// Ruta para guardar pedidos de POS Web Service
+app.post('/orden-posweb', async (req, res) => {
+  const { pedido, tipo } = req.body;
+
+  if (!Array.isArray(pedido) || pedido.length === 0) {
+    return res.status(400).json({ mensaje: 'El pedido está vacío.' });
+  }
+
+  try {
+    const OrdenPos = mongoose.model('OrdenPos', new mongoose.Schema({
+      pedido: Array,
+      tipo: String,
+      fecha: { type: Date, default: Date.now }
+    }));
+
+    const nuevaOrden = new OrdenPos({ pedido, tipo });
+    await nuevaOrden.save();
+
+    res.status(201).json({ mensaje: 'Pedido recibido correctamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al guardar el pedido' });
+  }
+});
+
+
 // Cerrar sesión
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
