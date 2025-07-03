@@ -1,3 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Caja - POS Web</title>
+  <link rel="stylesheet" href="posweb.css" />
+</head>
+<body>
+  <header>
+    <h1>Panel de Caja - Restaurante</h1>
+    <button onclick="location.href='posweb.html'">← Volver al menú</button>
+  </header>
+
+  <main style="max-width: 800px; margin: auto;">
+    <section>
+      <h2>Órdenes Pendientes</h2>
+      <ul id="lista-ordenes"></ul>
+    </section>
+
+    <section style="margin-top: 30px;">
+      <h2>📊 Estadísticas</h2>
+      <p>Total de órdenes: <span id="total-ordenes">0</span></p>
+      <p>Total vendido: $<span id="total-ventas">0</span></p>
+    </section>
+  </main>
+
   <script>
     async function cargarOrdenes() {
       try {
@@ -62,6 +88,8 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-    cargarOrdenes();
-  });
+      cargarOrdenes();
+    });
   </script>
+</body>
+</html>
