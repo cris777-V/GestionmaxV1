@@ -1,13 +1,13 @@
-/* === Fondo con animación suave azul-blanco === */
+/* Estilo general con animación de fondo más notoria */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 2rem;
   text-align: center;
   color: #003366;
-  background: linear-gradient(-45deg, #e6f0ff, #ffffff, #e6f0ff);
-  background-size: 600% 600%;
-  animation: fondoOscilante 15s ease infinite;
+  background: linear-gradient(-45deg, #cce6ff, #ffffff, #cce6ff);
+  background-size: 400% 400%;
+  animation: fondoOscilante 20s ease infinite;
 }
 
 @keyframes fondoOscilante {
@@ -16,108 +16,64 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* === Títulos === */
+/* Títulos */
 h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #004b99;
 }
 
-/* === Formularios === */
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  background-color: #f0f8ff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* === Etiquetas y campos === */
-label {
-  display: block;
-  text-align: left;
-  margin-bottom: 0.3rem;
-  font-weight: bold;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #aaccee;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-/* === Botones y enlaces animados === */
+/* Botones y enlaces con animación */
 button, .contact-block a, a {
   background-color: #0077cc;
   color: white;
   border: none;
-  padding: 0.7rem 1.2rem;
+  padding: 0.8rem 1.5rem;
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  display: inline-block;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   text-decoration: none;
+  display: inline-block;
+  margin: 0.5rem;
 }
 
 button:hover, .contact-block a:hover, a:hover {
   background-color: #005fa3;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* === Mensajes de alerta === */
+/* Contenedor de mensajes */
 #mensaje-alerta, .mensaje-error {
   margin-top: 1rem;
   color: #cc0000;
   font-weight: bold;
 }
 
-/* === Información de usuario === */
-#info-usuario p {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-}
-
-/* === Botón de regresar === */
-.volver {
-  margin-top: 2rem;
-  background-color: #cccccc;
-  color: #003366;
-}
-
-.volver:hover {
-  background-color: #aaaaaa;
-  transform: scale(1.05);
-}
-
-/* === Animación de entrada de sección informativa === */
+/* Descripción animada */
 #descripcion {
-  animation: deslizarCentro 1s ease-out forwards;
-  max-width: 800px;
-  margin: auto;
+  max-width: 900px;
+  margin: 2rem auto;
   text-align: left;
-  opacity: 0;
-  transform: translateY(30px);
+  animation: slideIn 1.5s ease-out;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-@keyframes deslizarCentro {
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* === Footer === */
+/* Footer */
 .footer-content {
   margin-top: 3rem;
   font-size: 0.9rem;
@@ -135,31 +91,37 @@ button:hover, .contact-block a:hover, a:hover {
   margin-right: 0.5rem;
 }
 
-/* === Responsividad === */
+/* Responsividad */
 @media (max-width: 768px) {
   body {
     padding: 1rem;
   }
-  form {
-    padding: 1.5rem;
-  }
+
   h1 {
     font-size: 1.5rem;
   }
-  button, .contact-block a {
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
+
+  button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  #descripcion {
+    padding: 1.5rem;
   }
 }
 
 @media (min-width: 1200px) {
-  #descripcion {
-    font-size: 1.1rem;
-  }
   h1 {
     font-size: 2.5rem;
   }
+
   button {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+  }
+
+  #descripcion {
     font-size: 1.1rem;
   }
 }
